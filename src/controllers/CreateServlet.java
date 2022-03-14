@@ -33,16 +33,14 @@ public class CreateServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String _token = request.getParameter("_token");
-        if(_token != null && _token.equals(request.getSession().getId())) {
+        if (_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
             em.getTransaction().begin();
 
             Task t = new Task();
-
-            /*            String title = request.getParameter("title");
-            t.setTitle(title);*/
 
             String content = request.getParameter("content");
             t.setContent(content);
@@ -55,7 +53,7 @@ public class CreateServlet extends HttpServlet {
 
             // バリデーションを実行してエラーがあったら新規登録のフォームに戻る
             List<String> errors = TaskValidator.validate(t);
-            if(errors.size() > 0) {
+            if (errors.size() > 0) {
                 em.close();
 
                 // フォームに初期値を設定、さらにエラーメッセージを送る
@@ -75,8 +73,6 @@ public class CreateServlet extends HttpServlet {
                 // indexのページにリダイレクト
                 response.sendRedirect(request.getContextPath() + "/index");
             }
-
-
 
         }
     }

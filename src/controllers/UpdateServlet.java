@@ -33,14 +33,15 @@ public class UpdateServlet extends HttpServlet {
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String _token = request.getParameter("_token");
-        if(_token != null && _token.equals(request.getSession().getId())) {
+        if (_token != null && _token.equals(request.getSession().getId())) {
             EntityManager em = DBUtil.createEntityManager();
 
             // セッションスコープからメッセージのIDを取得して
             // 該当のIDのメッセージ1件のみをデータベースから取得
-            Task t = em.find(Task.class, (Integer)(request.getSession().getAttribute("task_id")));
+            Task t = em.find(Task.class, (Integer) (request.getSession().getAttribute("task_id")));
 
             // フォームの内容を各フィールドに上書き
             /*            String title = request.getParameter("title");
@@ -50,10 +51,10 @@ public class UpdateServlet extends HttpServlet {
             t.setContent(content);
 
             Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-            t.setUpdated_at(currentTime);       // 更新日時のみ上書き
+            t.setUpdated_at(currentTime); // 更新日時のみ上書き
             // バリデーションを実行してエラーがあったら編集画面のフォームに戻る
             List<String> errors = TaskValidator.validate(t);
-            if(errors.size() > 0) {
+            if (errors.size() > 0) {
                 em.close();
 
                 // フォームに初期値を設定、さらにエラーメッセージを送る
