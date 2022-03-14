@@ -14,11 +14,11 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({
     @NamedQuery(
-            name = "getAllMessages",
+            name = "getAllTasks",
             query = "SELECT t FROM Task AS t ORDER BY t.id DESC"
             ),
     @NamedQuery(
-            name = "getMessagesCount",
+            name = "getTasksCount",
             query = "SELECT COUNT(t) FROM Task AS t"
             )
 })
@@ -53,7 +53,7 @@ public class Task {
     /*    public String getTitle() {
         return title;
     }
-    
+
     public void setTitle(String title) {
         this.title = title;
     }*/
