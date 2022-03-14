@@ -15,23 +15,23 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(
             name = "getAllMessages",
-            query = "SELECT m FROM Message AS m ORDER BY m.id DESC"
+            query = "SELECT t FROM Task AS t ORDER BY t.id DESC"
             ),
     @NamedQuery(
             name = "getMessagesCount",
-            query = "SELECT COUNT(m) FROM Message AS m"
+            query = "SELECT COUNT(t) FROM Task AS t"
             )
 })
-@Table(name = "messages")
+@Table(name = "tasks")
 
-public class Message {
+public class Task {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "title", length = 255, nullable = false)
-    private String title;
+    /*    @Column(name = "title", length = 255, nullable = false)
+    private String title;*/
 
     @Column(name = "content", length = 255, nullable = false)
     private String content;
@@ -50,13 +50,13 @@ public class Message {
         this.id = id;
     }
 
-    public String getTitle() {
+    /*    public String getTitle() {
         return title;
     }
-
+    
     public void setTitle(String title) {
         this.title = title;
-    }
+    }*/
 
     public String getContent() {
         return content;
